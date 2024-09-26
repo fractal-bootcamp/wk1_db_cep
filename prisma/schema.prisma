@@ -23,8 +23,9 @@ model Book {
     ISBN     String
     //n-m
     genre    Genre[]
-    memberId String
-    member   Member  @relation(fields: [memberId], references: [id])
+    memberId String?
+    member   Member? @relation(fields: [memberId], references: [id])
+    
 }
 
 model Author {
@@ -38,7 +39,7 @@ model Genre {
     id    String @id @default(cuid())
     //n-m
     books Book[]
-    name  String
+    name  String @unique
 }
 
 model Member {
