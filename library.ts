@@ -7,7 +7,7 @@ const prisma = new PrismaClient()
 async function main() {
     const book = await prisma.book.create({
         data: {
-            ISBN: '1837392780',
+            ISBN: '183739280',
             title: 'Read More',
             author: {
                 create: {
@@ -30,5 +30,25 @@ async function main() {
         }
     })
 
+    const firstBookIFound = await prisma.book.findFirst()
+    const author = await prisma.author.create({
+        data: {
+            name: 'NiceGuys',
+            bio: 'guyr r nice',
+            books: {
+                create: {
+                    ISBN: '1837392780',
+                    title: 'Read More',
+                }
+            }
+
+        }
+    })
+
+    const genre1 = await prisma.genre.create({
+        data: {
+            name: "scary stuff"
+        }
+    })
 }
 main(); 
